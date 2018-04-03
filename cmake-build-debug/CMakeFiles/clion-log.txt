@@ -1,7 +1,0 @@
-/home/isaac/Documents/clion-2017.3.4/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/isaac/Documents/PAID/tarea_4
--- Boost version: 1.65.1
--- Found the following Boost libraries:
---   program_options
--- Configuring done
--- Generating done
--- Build files have been written to: /home/isaac/Documents/PAID/tarea_4/cmake-build-debug
