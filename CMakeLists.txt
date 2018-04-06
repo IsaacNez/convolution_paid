@@ -7,7 +7,7 @@ FIND_PACKAGE( Boost COMPONENTS program_options REQUIRED )
 FIND_PACKAGE( OpenCV REQUIRED )
 
 ADD_EXECUTABLE( image_viewer
-src/main.cpp
+src/tarea04.cpp
 src/space_convolution.cpp
 src/frequency_convolution.cpp
 src/time_measure.cpp
