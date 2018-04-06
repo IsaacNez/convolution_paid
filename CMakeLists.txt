@@ -1,15 +1,16 @@
 cmake_minimum_required( VERSION 3.5.1 )
-set( CMAKE_CXX_STANDARD 11 )
 
-set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -funroll-loops" )
+SET( CMAKE_CXX_STANDARD 11 )
+SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -funroll-loops -flto -D _DEFAULT_SOURCE -Wall -Wextra -Wpedantic")
+
 FIND_PACKAGE( Boost COMPONENTS program_options REQUIRED )
 FIND_PACKAGE( OpenCV REQUIRED )
-#find_package(PythonLibs 2.7.12 REQUIRED)
 
-ADD_EXECUTABLE( image_viewer src/main.cpp)
+ADD_EXECUTABLE( image_viewer
+src/main.cpp
+src/space_convolution.cpp
+src/frequency_convolution.cpp
+src/time_measure.cpp
+)
 
-#target_include_directories(image_viewer PRIVATE ${PYTHON_INCLUDE_DIRS})
-#target_link_libraries(image_viewer ${PYTHON_LIBRARIES})
-#TARGET_LINK_libraries( image_viewer ${OpenCV_LIBS} ${Boost_LIBRARIES} )
-
-
+TARGET_LINK_LIBRARIES( image_viewer ${OpenCV_LIBS} )
