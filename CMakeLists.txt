@@ -11,6 +11,7 @@ src/tarea04.cpp
 src/space_convolution.cpp
 src/frequency_convolution.cpp
 src/time_measure.cpp
+src/runs_per_case.cpp
 )
 
 TARGET_LINK_LIBRARIES( image_viewer ${OpenCV_LIBS} )
