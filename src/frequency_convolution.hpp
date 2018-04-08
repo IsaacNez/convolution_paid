@@ -5,6 +5,10 @@
 #include <cstdlib>
 #include <cstdio>
 
-void frequency_convolution (int argc, char** argv);
+void
+separable (const char* img_filename);
+
+void
+frequency_convolution (const char* img_filename);
 
 #endif // FREQUENCY_CONVOLUTION_HPP

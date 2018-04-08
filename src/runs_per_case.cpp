@@ -1,14 +1,15 @@
 #include "runs_per_case.hpp"
 
 int
-estimate_runs (int img_size_h, int img_size_v, int kern_size) {
+estimate_runs (int img_size_h, int img_size_v, int kern_size)
+{
   float estimation;
   int max_img_size_h = 1920;
   int max_img_size_v = 1080;
   int max_kern_size = 1023;
   int max_runs = 20;
   int min_runs = 3;
-t
+
   float numerator = (img_size_v*img_size_h + kern_size*kern_size);
   float denominator = max_img_size_h*max_img_size_v + max_kern_size*max_kern_size;
 
