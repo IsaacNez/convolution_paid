@@ -4,9 +4,12 @@
 #include <cstddef>
 #include <cstdlib>
 #include <cstdio>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 void
-separable (const char* img_filename);
+separable_freq (const char* img_filename);
 
 void
 frequency_convolution (const char* img_filename);

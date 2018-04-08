@@ -26,7 +26,7 @@ int main (int argc, char** argv)
 {
   const char* test_image = (argc >= 2) ? argv[1] : "convolution_test_image.png";
   space_convolution (test_image);
-  frequency_convolution (argc, argv);
+  frequency_convolution (test_image);
 
   exit (EXIT_SUCCESS);
 }

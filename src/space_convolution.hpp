@@ -4,9 +4,13 @@
 #include <cstddef>
 #include <cstdlib>
 #include <cstdio>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include "time_measure.hpp"
 
 void
-separable (const char* img_filename);
+separable_space (const char* img_filename);
 
 void
 space_convolution (const char* img_filename);

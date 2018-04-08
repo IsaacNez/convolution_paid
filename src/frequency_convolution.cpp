@@ -1,7 +1,7 @@
 #include "frequency_convolution.hpp"
 
 void
-separable (const char* img_filename)
+separable_freq (const char* img_filename)
 {
   cv::Mat orig = cv::imread (img_filename, CV_LOAD_IMAGE_GRAYSCALE);
   if (orig.empty ())
