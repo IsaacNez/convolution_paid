@@ -2,6 +2,29 @@
 #include "constants.hpp"
 #include "runs_per_case.hpp"
 
+void spatial_non_separable_convolution(const cv::Mat &gaussian_kernel,
+                                        const cv::Mat &orig) {
+
+  cv::Mat dst  = cv::Mat::zeros(orig.rows, orig.cols, orig.type());
+  dst.create(orig.size(),orig.type());
+
+  cv::Mat kernel = cv::Mat::zeros(gaussian_kernel.cols,gaussian_kernel.cols,gaussian_kernel.type());
+  generate_gaussian_kernel(gaussian_kernel,kernel);
+
+  cv::Point anchor = cv::Point(-1,-1);
+  cv::filter2D(orig,dst,-1,kernel,anchor,0,cv::BORDER_DEFAULT);
+
+  cv::imshow("CV_Orig",orig);
+  cv::imshow("CV_Gaussian_Filter_Space_Non_Separable",dst);
+  cv::waitKey();
+}
+
+void generate_gaussian_kernel(const cv::Mat &gaussian_kernel, cv::Mat &spatial_kernel) {
+  cv::Mat transpose = cv::Mat::zeros(gaussian_kernel.cols, gaussian_kernel.rows, gaussian_kernel.type());
+  cv::transpose(gaussian_kernel, transpose);
+  spatial_kernel = gaussian_kernel * transpose;
+}
+
 void
 separable_space (const char* img_filename)
 {
@@ -43,3 +66,6 @@ space_convolution (const char* img_filename)
 {
   separable_space (img_filename);
 }
+
+
+
