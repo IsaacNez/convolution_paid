@@ -24,10 +24,10 @@ void frecuency_nonseparable_convolution(const cv::Mat &gkernel, const cv::Mat &i
   cv::Mat result = cv::Mat::zeros(irows,icols,ipadded.type());
   discrete_transform(ipadded,kpadded,trows,tcols,result);
 
-  std::cout<<"Padded image: "<<kpadded.cols<<" "<<kpadded.rows<<std::endl;
+  /**std::cout<<"Padded image: "<<kpadded.cols<<" "<<kpadded.rows<<std::endl;
   std::cout<< "Image data: "<<result.cols<<" "<<result.rows<<std::endl;
   cv::imshow("Padded",result);
-  cv::waitKey();
+  cv::waitKey();*/
 }
 
 void discrete_transform(cv::Mat &ipadded,

@@ -14,9 +14,9 @@ void spatial_non_separable_convolution(const cv::Mat &gaussian_kernel,
   cv::Point anchor = cv::Point(-1,-1);
   cv::filter2D(orig,dst,-1,kernel,anchor,0,cv::BORDER_DEFAULT);
 
-  cv::imshow("CV_Orig",orig);
+  /**cv::imshow("CV_Orig",orig);
   cv::imshow("CV_Gaussian_Filter_Space_Non_Separable",dst);
-  cv::waitKey();
+  cv::waitKey();*/
 }
 
 void generate_gaussian_kernel(const cv::Mat &gaussian_kernel, cv::Mat &spatial_kernel) {
@@ -61,11 +61,6 @@ separable_space (const char* img_filename)
   //plot_space_convolution_run_times (run_times);
 }
 
-void
-space_convolution (const char* img_filename)
-{
-  separable_space (img_filename);
-}
 
 
 
