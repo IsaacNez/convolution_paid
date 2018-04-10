@@ -14,7 +14,7 @@ void param_parser(int argc, char** argv){
     ("help,h","Help")
     ("kernel-i,i",po::value<int>()->default_value(3),"Kernel row size")
     ("kernel-j,j",po::value<int>()->default_value(3),"Kernel column size")
-    ("plot,p",po::value<std::string>()->default_value("Lenna.png"),"Plot")
+    ("plot,p",po::value<std::string>()->default_value("convolution_test_image.png"),"Plot")
     ;
 
   po::variables_map vm;

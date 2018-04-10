@@ -19,8 +19,25 @@
 #include <string>
 #include <chrono>
 
+/**
+ * Creates all the test cases for frequency and spatial filtering using
+ * separable and non-separable kernels
+ * @param file_name path to the image to be filtered using gaussian filters.
+ */
 void plotConv(const std::string& file_name);
 
+/**
+ * Plots the data into the respective SVGs using a Python interface through Pyhton.h.
+ * @param FSSx x-points refering to spatial filtering with Separable Kernel
+ * @param FSSy y-points refering to spatial filtering with Separable Kernel
+ * @param FSSz y-points refering to spatial filtering with Separable Kernel
+ * @param FNSSx x-points refering to spatial filtering with Non-Separable Kernel
+ * @param FNSSy y-points refering to spatial filtering with Non-Separable Kernel
+ * @param FNSSz z-points refering to spatial filtering with Non-Separable Kernel
+ * @param FNSFx x-points refering to frequency filtering with Non-Separable Kernel
+ * @param FNSFy y-points refering to frequency filtering with Non-Separable Kernel
+ * @param FNSFz z-points refering to frequency filtering with Non-Separable Kernel
+ */
 void plotpython(const std::vector<double> FSSx,
                 const std::vector<double> FSSy,
                 const std::vector<double> FSSz,

@@ -2,7 +2,7 @@
 #include "frequency_convolution.hpp"
 #include "space_convolution.hpp"
 
-void frecuency_nonseparable_convolution(const cv::Mat &gkernel, const cv::Mat &image) {
+void frequency_nonseparable_convolution(const cv::Mat &gkernel, const cv::Mat &image) {
   cv::Mat kernel = cv::Mat::zeros(gkernel.rows,gkernel.rows,gkernel.type());
 
   generate_gaussian_kernel(gkernel,kernel);
