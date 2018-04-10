@@ -23,17 +23,13 @@ void frecuency_nonseparable_convolution(const cv::Mat &gkernel, const cv::Mat &i
 
   cv::Mat result = cv::Mat::zeros(irows,icols,ipadded.type());
   discrete_transform(ipadded,kpadded,trows,tcols,result);
-
-  /**std::cout<<"Padded image: "<<kpadded.cols<<" "<<kpadded.rows<<std::endl;
-  std::cout<< "Image data: "<<result.cols<<" "<<result.rows<<std::endl;
-  cv::imshow("Padded",result);
-  cv::waitKey();*/
 }
 
 void discrete_transform(cv::Mat &ipadded,
                         const cv::Mat &kpadded,
                         const int& trows,
-                        const int& tcols,cv::Mat &result) {
+                        const int& tcols,
+                        cv::Mat &result) {
 
   cv::Mat iplanes[] = {cv::Mat_<float>(ipadded), cv::Mat::zeros(ipadded.size(), CV_32F)};
   cv::Mat kplanes[] = {cv::Mat_<float>(kpadded), cv::Mat::zeros(kpadded.size(), CV_32F)};
@@ -51,6 +47,5 @@ void discrete_transform(cv::Mat &ipadded,
   cv::dft(icomplex, ipadded, cv::DFT_INVERSE | cv::DFT_REAL_OUTPUT);
 
   cv::normalize(ipadded, ipadded, 0, 1, CV_MINMAX);
-
-  ipadded(cv::Rect(trows, tcols, ipadded.rows - 2 * trows, ipadded.cols - 2 * tcols)).copyTo(result);
+  ipadded(cv::Rect(tcols, trows,ipadded.cols - 2*tcols,ipadded.rows - 2*trows)).copyTo(result);
 }

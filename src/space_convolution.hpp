@@ -13,7 +13,9 @@ void spatial_non_separable_convolution(const cv::Mat& gaussian_kernel,
                                         const cv::Mat& orig);
 
 
-void separable_space (const char* img_filename);
+void separable_space (const cv::Mat& orig,
+                      const int& current_k_size,
+                      const double& sigma);
 
 void generate_gaussian_kernel(const cv::Mat& gaussian_kernel,
                               cv::Mat& spatial_kernel);

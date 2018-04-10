@@ -24,16 +24,11 @@
 #include "space_convolution.hpp"
 #include "frequency_convolution.hpp"
 #include "constants.hpp"
+#include "param_parser.cpp"
 
 int main (int argc, char** argv)
 {
-  int kernel_size = kernel_sizes[3];
-  double sigma = ((kernel_size+2)/6);
-  cv::Mat gaussian_filter = cv::getGaussianKernel(kernel_size,sigma,CV_32F);
-  cv::Mat orig = cv::imread("Lenna.png",CV_LOAD_IMAGE_GRAYSCALE);
-  spatial_non_separable_convolution(gaussian_filter,orig);
-  frecuency_nonseparable_convolution(gaussian_filter,orig);
-  /**const char* test_image = (argc >= 2) ? argv[1] : "convolution_test_image.png";
-  space_convolution (test_image);*/
+  param_parser(argc,argv);
+
   exit (EXIT_SUCCESS);
 }
