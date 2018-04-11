@@ -13,6 +13,8 @@ void spatial_non_separable_convolution(const cv::Mat &gaussian_kernel,
 
   cv::Point anchor = cv::Point(-1,-1);
   cv::filter2D(orig,dst,-1,kernel,anchor,0,cv::BORDER_DEFAULT);
+  cv::imshow("Spatial convolution",dst);
+  cv::waitKey();
 }
 
 void generate_gaussian_kernel(const cv::Mat &gaussian_kernel, cv::Mat &spatial_kernel) {

@@ -14,7 +14,7 @@
  * @param image original image to be filtered
  */
 void frequency_nonseparable_convolution(const cv::Mat& kernel,
-                                        const cv::Mat& image);
+                                        cv::Mat& image);
 
 /**
  * Computes the iDFT using the result from the multiplication of spectrums.
@@ -27,7 +27,7 @@ void frequency_nonseparable_convolution(const cv::Mat& kernel,
  * @param result image resultant w/o black borders and filtered in frequency
  */
 void discrete_transform(cv::Mat& image_padded,
-                        const cv::Mat& kernel_padded,
+                        cv::Mat& kernel_padded,
                         const int& trows,
                         const int& tcols,
                         cv::Mat& result);

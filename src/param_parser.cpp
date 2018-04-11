@@ -4,6 +4,7 @@
 
 #include "param_parser.hpp"
 
+#include <cassert>
 
 namespace po = boost::program_options;
 
@@ -14,7 +15,7 @@ void param_parser(int argc, char** argv){
     ("help,h","Help")
     ("kernel-i,i",po::value<int>()->default_value(3),"Kernel row size")
     ("kernel-j,j",po::value<int>()->default_value(3),"Kernel column size")
-    ("plot,p",po::value<std::string>()->default_value("convolution_test_image.png"),"Plot")
+    ("plot,p",po::value<std::string>(),"Plot")
     ;
 
   po::variables_map vm;
@@ -22,7 +23,14 @@ void param_parser(int argc, char** argv){
   po::notify(vm);
 
   if(vm.count("kernel-i") & vm.count("kernel-j") & !vm.count("plot")){
-    //do spatial and frequency convolution
+    int ki = vm["kernel-i"].as<int>();
+    int kj = vm["kernel-i"].as<int>();
+    cv::Mat original = cv::imread("convolution_test_image.png",CV_LOAD_IMAGE_GRAYSCALE);
+    assert(ki==kj);
+    double sigma = ((ki + 2) / 6);
+    cv::Mat gaussian_filter = cv::getGaussianKernel(ki, sigma, CV_32FC1);  //creates the gaussian filter based on the size of the kernel
+    spatial_non_separable_convolution(gaussian_filter, original);
+    frequency_nonseparable_convolution(gaussian_filter, original);
   }else if (vm.count("plot")){
     std::string file_name = vm["plot"].as<std::string>();
     plotConv(file_name);

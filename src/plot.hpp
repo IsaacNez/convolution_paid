@@ -10,8 +10,9 @@
 #include "space_convolution.hpp"
 #include "constants.hpp"
 #include "Python.h"
-#include <boost/lexical_cast.hpp>
 
+
+#include <boost/lexical_cast.hpp>
 #include <cstdlib>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -28,25 +29,35 @@ void plotConv(const std::string& file_name);
 
 /**
  * Plots the data into the respective SVGs using a Python interface through Pyhton.h.
- * @param FSSx x-points refering to spatial filtering with Separable Kernel
- * @param FSSy y-points refering to spatial filtering with Separable Kernel
- * @param FSSz y-points refering to spatial filtering with Separable Kernel
- * @param FNSSx x-points refering to spatial filtering with Non-Separable Kernel
- * @param FNSSy y-points refering to spatial filtering with Non-Separable Kernel
- * @param FNSSz z-points refering to spatial filtering with Non-Separable Kernel
- * @param FNSFx x-points refering to frequency filtering with Non-Separable Kernel
- * @param FNSFy y-points refering to frequency filtering with Non-Separable Kernel
- * @param FNSFz z-points refering to frequency filtering with Non-Separable Kernel
+ * @param FSSx x-points refering to spatial or frequency filtering with (Non)Separable Kernel
+ * @param FSSy y-points refering to spatial or frequency filtering with (Non)Separable Kernel
+ * @param FSSz y-points refering to spatial or frequency filtering with (Non)Separable Kernel
+ * @param label label that will appear on the figure stating what the points refers to
+ * @param file_name name of the resultant file
  */
-void plotpython(const std::vector<double> FSSx,
-                const std::vector<double> FSSy,
-                const std::vector<double> FSSz,
+void plotpython(const std::vector<double>& FSSx,
+                const std::vector<double>& FSSy,
+                const std::vector<double>& FSSz,
+                std::string label,
+                std::string file_name);
 
-                const std::vector<double> FNSSx,
-                const std::vector<double> FNSSy,
-                const std::vector<double> FNSSz,
-
-                const std::vector<double> FNSFx,
-                const std::vector<double> FNSFy,
-                const std::vector<double> FNSFz);
+/**
+ * Plots two sets of data in a same figure.
+ * @param FNSSx
+ * @param FNSSy
+ * @param FNSSz
+ * @param FNSFx
+ * @param FNSFy
+ * @param FNSFz
+ * @param label
+ * @param label2
+ */
+void plotpython2(const std::vector<double>& FNSSx,
+                 const std::vector<double>& FNSSy,
+                 const std::vector<double>& FNSSz,
+                 const std::vector<double>& FNSFx,
+                 const std::vector<double>& FNSFy,
+                 const std::vector<double>& FNSFz,
+                 std::string label,
+                  std::string label2);
 #endif //PROJECT_PLOT_HPP
