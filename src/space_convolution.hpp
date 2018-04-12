@@ -27,9 +27,10 @@
 #include <opencv2/highgui/highgui.hpp>
 
 /**
- * Spacial Filtering using non-separable kernel with a size nx1. It also recieves an
- * image in grayscale or color. It uses filter2D to apply the gaussian filter.
- * @param gaussian_kernel gaussian kernel in the form of nx1.
+ * @brief Spacial Filtering using non-separable kernel with a size Nx1.
+ * @details It also receives an image in greyscale or color. It uses
+ *          filter2D to apply the gaussian filter.
+ * @param gaussian_kernel gaussian kernel of size Nx1.
  * @param orig original image to be filtered
  */
 void spatial_non_separable_convolution(const cv::Mat& gaussian_kernel,
@@ -49,8 +50,8 @@ void separable_space (const cv::Mat& orig,
                       const double& sigma);
 
 /**
- * computes the non-separable kernel coming from a gaussian kernel in the form nx1
- * spatial_kernel = guassian_kernel*guassian_kernel' to form a matrix nxn
+ * @brief Computes the non-separable kernel coming from a gaussian kernel in the form Nx1
+ * @details spatial_kernel = guassian_kernel*guassian_kernel' to form a matrix of size NxN
  * @param gaussian_kernel kernel input in the form of nx1
  * @param spatial_kernel output kernel in the form nxn
  */

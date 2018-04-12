@@ -37,20 +37,20 @@ void plotConv(std::string& file_name){
   std::vector<double> testFSSx(k_sizes);  //x points of 3Dplot with Spatial Filtering and Separable Kernel
   std::vector<double> testFNSSx(k_sizes); //x points of 3Dplot with Spatial Filtering and Non-Separable Kernel
   std::vector<double> testFNSFx(k_sizes); //x points of 3Dplot with Frequency Filtering and Non-Separable Kernel
-  std::vector<double> diverSx(k_sizes);
-  std::vector<double> diverFx(k_sizes);
+  std::vector<double> diverSx(k_sizes);   //x points of 3Dplot calculating image norm using spatial filtering
+  std::vector<double> diverFx(k_sizes);   //x points of 3Dplot calculating image norm using frequency filtering
 
   std::vector<double> testFSSy(k_sizes);  //y points of 3Dplot with Spatial Filtering and Separable Kernel
   std::vector<double> testFNSSy(k_sizes); //y points of 3Dplot with Spatial Filtering and Non-Separable Kernel
   std::vector<double> testFNSFy(k_sizes); //y points of 3Dplot with Frequency Filtering and Non-Separable Kernel
-  std::vector<double> diverSy(k_sizes);
-  std::vector<double> diverFy(k_sizes);
+  std::vector<double> diverSy(k_sizes);   //y points of 3Dplot calculating image norm using spatial filtering
+  std::vector<double> diverFy(k_sizes);   //y points of 3Dplot calculating image norm using frequency filtering
 
   std::vector<double> testFSSz(k_sizes);  //z points of 3Dplot with Spatial Filtering and Separable Kernel
   std::vector<double> testFNSSz(k_sizes); //z points of 3Dplot with Spatial Filtering and Non-Separable Kernel
   std::vector<double> testFNSFz(k_sizes); //z points of 3Dplot with Frequency Filtering and Non-Separable Kernel
-  std::vector<double> diverSz(k_sizes);
-  std::vector<double> diverFz(k_sizes);
+  std::vector<double> diverSz(k_sizes);   //z points of 3Dplot calculating image norm using spatial filtering
+  std::vector<double> diverFz(k_sizes);   //z points of 3Dplot calculating image norm using frequency filtering
 
   for(int i = 0; i < k_sizes; ++i) {
     std::cout<<"Iteration: "<<i+1<<std::endl;
@@ -156,7 +156,7 @@ void plotConv(std::string& file_name){
              sfsk,
              sfskfn);
 
-  sfsk = ",'x',color='green',label='Frecuency Image Norm'";
+  sfsk = ",'x',color='green',label='Frequency Image Norm'";
   sfskfn = ",'+',color='black',label='Spatial Image Norm'";
   std::string zlabel = "Matrix norm";
   std::string file = "image_norm.svg";

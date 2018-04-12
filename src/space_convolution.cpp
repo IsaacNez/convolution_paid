@@ -19,7 +19,7 @@
 #include "space_convolution.hpp"
 #include "constants.hpp"
 #include "runs_per_case.hpp"
-
+#include <iostream>
 void spatial_non_separable_convolution(const cv::Mat &gaussian_kernel,
                                         const cv::Mat &orig,
                                         cv::Mat& final) {
@@ -34,7 +34,6 @@ void spatial_non_separable_convolution(const cv::Mat &gaussian_kernel,
   cv::filter2D(orig,dst,-1,kernel,anchor,0,cv::BORDER_DEFAULT);
 
   final = dst;
-  //std::cout << dst.depth()<<std::endl;
   //cv::imwrite("result.png",dst);
 }
 

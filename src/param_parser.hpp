@@ -34,7 +34,7 @@
 
 
 /**
- * Parses the input using boost::program_options
+ * @brief Parses the input using boost::program_options
  * @param argc input from the command line: amount of inputs
  * @param argv input from the command line: inputs
  */

@@ -26,9 +26,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 
 /**
- * Computes the frequency convolution using a non-separable kernel.
- * it computes the nxn kernel using the nx1 kernel.
- * @param kernel kernel in the form nx1
+ * @brief Computes the frequency convolution using a non-separable kernel.
+ * @details It computes the NxN kernel using the Nx1 kernel.
+ * @param kernel kernel of size Nx1
  * @param image original image to be filtered
  */
 void frequency_nonseparable_convolution(const cv::Mat& kernel,
@@ -36,8 +36,8 @@ void frequency_nonseparable_convolution(const cv::Mat& kernel,
                                         cv::Mat& final);
 
 /**
- * Computes the iDFT using the result from the multiplication of spectrums.
- * It also crops the black borders created in the padding and restore the image
+ * @brief Computes the iDFT using the result from the multiplication of spectrums.
+ * @details It also crops the black borders created in the padding and restore the image
  * to its original size.
  * @param image_padded original image with padding
  * @param kernel_padded kernel with padding

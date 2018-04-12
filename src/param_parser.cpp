@@ -41,7 +41,7 @@ void param_parser(int argc, char** argv){
   if(vm.count("kernel-i") & vm.count("kernel-j") & !vm.count("plot")){
     int ki = vm["kernel-i"].as<int>();
     int kj = vm["kernel-i"].as<int>();
-    cv::Mat original = cv::imread("Lenna.png",CV_LOAD_IMAGE_GRAYSCALE);
+    cv::Mat original = cv::imread("convolution_test_image.png",CV_LOAD_IMAGE_GRAYSCALE);
     assert(ki==kj);
     double sigma = ((ki + 2) / 6);
     cv::Mat test;

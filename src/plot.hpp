@@ -57,15 +57,17 @@ void plotpython(const std::vector<double>& FSSx,
                 std::string file_name);
 
 /**
- * Plots two sets of data in a same figure.
- * @param FNSSx
- * @param FNSSy
- * @param FNSSz
- * @param FNSFx
- * @param FNSFy
- * @param FNSFz
- * @param label
- * @param label2
+ * @brief It plots in python two sets of data.
+ * @param FNSSx x-points from the first set of data
+ * @param FNSSy y-points from the first set of data
+ * @param FNSSz z-points from the first set of data
+ * @param FNSFx x-points from the second set of data
+ * @param FNSFy y-points from the second set of data
+ * @param FNSFz z-points from the second set of data
+ * @param label plot conditions for the first set of data (marker, color and label)
+ * @param label2 plot conditions for the second set of data (marker, color and label)
+ * @param zlabel label for the z axis
+ * @param file_name file name where the plot will be saved.
  */
 void plotpython2(const std::vector<double>& FNSSx,
                  const std::vector<double>& FNSSy,
@@ -78,6 +80,10 @@ void plotpython2(const std::vector<double>& FNSSx,
                  std::string zlabel = "Time (in microseconds)",
                  std::string file_name = "F&SFNSK.svg");
 
-
+/**
+ * @brief It calculates a matrix norm using Frobenius equation
+ * @param image image in cv::Mat form.
+ * @return frobenius norm for the respective image.
+ */
 double frobenius(const cv::Mat& image);
 #endif //PROJECT_PLOT_HPP
