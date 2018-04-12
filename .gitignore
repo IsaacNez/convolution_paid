@@ -3,3 +3,8 @@ cmake-build-debug/
 .idea/
 build
 Lenna.png
+image_viewer
+Makefile
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/*
