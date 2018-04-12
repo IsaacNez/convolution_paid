@@ -44,7 +44,7 @@ Versión mínima de boost `libboost1.58` y versión mínima de cmake `3.5.1`.
     -p/--plot: se realizan las pruebas, indicar la imagen a usar
                   (debe tener un tamaño mínimo de 1920x1080)
 
-Si utiliza `-p/--plot`, esta generará 4 imágenes: 
+Si utiliza `-p/--plot`, esta generará 5 imágenes: 
 
     SFSK.svg: tiempo de ejecución del filtrado en espacio con kernel 
               separable para diferentes tamaños de kernel y de imágenes.
@@ -58,3 +58,7 @@ Si utiliza `-p/--plot`, esta generará 4 imágenes:
     F&SFNSK.svg: gráfica comparativa entre el tiempo de ejecución con filtrado
                  en frecuencia y espacio usando kernel no separables para diferentes 
                  tamaños de kernel e imágenes
+                 
+    image_norm.svg: Comparativa entre la norma para imágenes con filtrado en 
+                    espacio y frecuencia usando kernel de diferentes tamaños para
+                    imágenes de tamaños diferentes
