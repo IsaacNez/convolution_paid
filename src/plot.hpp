@@ -1,6 +1,21 @@
-//
-// Created by isaac on 4/9/18.
-//
+/**
+ * This file is part of a program to measure time spent by
+ * passing images through gaussian filters, using separable
+ * and non-separable filter kernels, in both space, and frequency.
+ *
+ * The functions defined here plot a matrix of numbers
+ * and are used to plot the execution time measured of the image filtering
+ * 
+ * Created by: David Cordero Chavarría (dcorderoch@ieee.org)
+ *             Isaac Núñez Araya (isaacnez@outlook.com)
+
+ * Date: 04/08/2018
+ * 
+ * Copyright (C) 2018
+ * 
+ * This file is part of a processing and analysis of digital course images project.
+ * For modifications, please contact the authors.
+ */
 
 #ifndef PROJECT_PLOT_HPP
 #define PROJECT_PLOT_HPP

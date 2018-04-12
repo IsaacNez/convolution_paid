@@ -1,3 +1,21 @@
+/**
+ * This file is part of a program to measure time spent by
+ * passing images through gaussian filters, using separable
+ * and non-separable filter kernels, in both space, and frequency.
+ *
+ * The functions defined here run the spatial gaussian filter
+ * 
+ * Created by: David Cordero Chavarría (dcorderoch@ieee.org)
+ *             Isaac Núñez Araya (isaacnez@outlook.com)
+
+ * Date: 04/08/2018
+ * 
+ * Copyright (C) 2018
+ * 
+ * This file is part of a processing and analysis of digital course images project.
+ * For modifications, please contact the authors.
+ */
+
 #ifndef SPACE_CONVOLUTION_HPP
 #define SPACE_CONVOLUTION_HPP
 
@@ -20,6 +38,13 @@ void spatial_non_separable_convolution(const cv::Mat& gaussian_kernel,
                                         cv::Mat& final);
 
 
+/**
+ * @brief Spatial filtering using a separable kernel of size NxN
+ * @details take the original image, kernel size, and sigma, and apply filter
+ * @param orig the original image to be filtered
+ * @param current_k_size the size of the kernel
+ * @param sigma the variance of the filters, using sigma = (k_size + 2)/6
+ */
 void separable_space (const cv::Mat& orig,
                       const int& current_k_size,
                       const double& sigma);

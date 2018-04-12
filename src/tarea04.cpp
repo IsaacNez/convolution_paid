@@ -3,9 +3,7 @@
  * passing images through gaussian filters, using separable
  * and non-separable filter kernels, in both space, and frequency.
  *
- * The function defined here checks for an argument, which is to be an
- * image file name, and if there isn't one, tries to set one to a default
- * name of convolution_test_image.png
+ * The function defined here checks for an argument
  * 
  * Created by: David Cordero Chavarría (dcorderoch@ieee.org)
  *             Isaac Núñez (isaacnez@outlook.com)

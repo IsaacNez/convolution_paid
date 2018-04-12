@@ -1,3 +1,22 @@
+/**
+ * This file is part of a program to measure time spent by
+ * passing images through gaussian filters, using separable
+ * and non-separable filter kernels, in both space, and frequency.
+ *
+ * The function defined here returns the number of times to run
+ * a filter as a function of the size of the image, and the filter's kernel.
+ * 
+ * Created by: David Cordero Chavarría (dcorderoch@ieee.org)
+ *             Isaac Núñez Araya (isaacnez@outlook.com)
+
+ * Date: 04/08/2018
+ * 
+ * Copyright (C) 2018
+ * 
+ * This file is part of a processing and analysis of digital course images project.
+ * For modifications, please contact the authors.
+ */
+
 #include "runs_per_case.hpp"
 
 int

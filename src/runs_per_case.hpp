@@ -7,6 +7,8 @@
  * a filter as a function of the size of the image, and the filter's kernel.
  * 
  * Created by: David Cordero Chavarría (dcorderoch@ieee.org)
+ *             Isaac Núñez Araya (isaacnez@outlook.com)
+
  * Date: 04/08/2018
  * 
  * Copyright (C) 2018

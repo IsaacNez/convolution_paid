@@ -1,7 +1,20 @@
+/**
+ * This file is part of a program to measure time spent by
+ * passing images through gaussian filters, using separable
+ * and non-separable filter kernels, in both space, and frequency.
+ *
+ * This file defines the image and kernel horizontal and vertical dimentions
+ *
+ * Created by: David Cordero Chavarría (dcorderoch@ieee.org)
+ *             Isaac Núñez Araya (isaacnez@outlook.com)
 
-//
-// Created by isaac on 4/8/18.
-//
+ * Date: 04/08/2018
+ * 
+ * Copyright (C) 2018
+ * 
+ * This file is part of a processing and analysis of digital course images project.
+ * For modifications, please contact the authors.
+ */
 
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
