@@ -10,7 +10,6 @@ ADD_EXECUTABLE( image_viewer
         src/tarea04.cpp
         src/space_convolution.cpp
         src/frequency_convolution.cpp
-        src/time_measure.cpp
         src/runs_per_case.cpp
         src/param_parser.hpp
         src/plot.hpp)
