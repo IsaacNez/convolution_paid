@@ -16,7 +16,8 @@
  * @param orig original image to be filtered
  */
 void spatial_non_separable_convolution(const cv::Mat& gaussian_kernel,
-                                        const cv::Mat& orig);
+                                        const cv::Mat& orig,
+                                        cv::Mat& final);
 
 
 void separable_space (const cv::Mat& orig,

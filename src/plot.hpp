@@ -59,5 +59,10 @@ void plotpython2(const std::vector<double>& FNSSx,
                  const std::vector<double>& FNSFy,
                  const std::vector<double>& FNSFz,
                  std::string label,
-                  std::string label2);
+                 std::string label2,
+                 std::string zlabel = "Time (in microseconds)",
+                 std::string file_name = "F&SFNSK.svg");
+
+
+double frobenius(const cv::Mat& image);
 #endif //PROJECT_PLOT_HPP

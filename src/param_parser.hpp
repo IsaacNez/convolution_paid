@@ -15,6 +15,9 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
+
+
+
 /**
  * Parses the input using boost::program_options
  * @param argc input from the command line: amount of inputs

@@ -25,12 +25,13 @@ void param_parser(int argc, char** argv){
   if(vm.count("kernel-i") & vm.count("kernel-j") & !vm.count("plot")){
     int ki = vm["kernel-i"].as<int>();
     int kj = vm["kernel-i"].as<int>();
-    cv::Mat original = cv::imread("convolution_test_image.png",CV_LOAD_IMAGE_GRAYSCALE);
+    cv::Mat original = cv::imread("Lenna.png",CV_LOAD_IMAGE_GRAYSCALE);
     assert(ki==kj);
     double sigma = ((ki + 2) / 6);
+    cv::Mat test;
     cv::Mat gaussian_filter = cv::getGaussianKernel(ki, sigma, CV_32FC1);  //creates the gaussian filter based on the size of the kernel
-    spatial_non_separable_convolution(gaussian_filter, original);
-    frequency_nonseparable_convolution(gaussian_filter, original);
+    spatial_non_separable_convolution(gaussian_filter, original,test);
+    frequency_nonseparable_convolution(gaussian_filter, original,test);
   }else if (vm.count("plot")){
     std::string file_name = vm["plot"].as<std::string>();
     plotConv(file_name);

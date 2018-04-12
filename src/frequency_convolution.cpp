@@ -2,7 +2,9 @@
 #include "frequency_convolution.hpp"
 #include "space_convolution.hpp"
 
-void frequency_nonseparable_convolution(const cv::Mat &gkernel, cv::Mat &image) {
+void frequency_nonseparable_convolution(const cv::Mat &gkernel,
+                                        cv::Mat& image2,
+                                        cv::Mat& final) {
 
 
   cv::Mat kernel = cv::Mat::zeros(gkernel.rows,gkernel.rows,gkernel.type());
@@ -10,7 +12,8 @@ void frequency_nonseparable_convolution(const cv::Mat &gkernel, cv::Mat &image) 
 
   cv::Mat ipadded;
   cv::Mat kpadded;
-  image.convertTo(image,CV_32F);
+  cv::Mat image;
+  image2.convertTo(image,CV_32F);
   int icols = image.cols;
   int irows = image.rows;
 
@@ -20,14 +23,17 @@ void frequency_nonseparable_convolution(const cv::Mat &gkernel, cv::Mat &image) 
   int trows = (krows-1)/2;
   int tcols = (kcols-1)/2;
 
-  int x = icols - kcols;
-  int y = irows - krows;
-
   cv::copyMakeBorder(image,ipadded,0,(kcols-1),0,(kcols-1),cv::BORDER_CONSTANT,cv::Scalar::all (0));
-  cv::copyMakeBorder(kernel,kpadded,y/2+trows,y/2+trows+1,x/2+trows,x/2+trows+1,cv::BORDER_CONSTANT,cv::Scalar::all (0));
+  cv::copyMakeBorder(kernel,kpadded,irows/2,irows/2-1,icols/2,icols/2-1,cv::BORDER_CONSTANT,cv::Scalar::all (0));
 
-  cv::Mat result;
+  cv::Mat result = cv::Mat::zeros(ipadded.size(),CV_32F);
   discrete_transform(ipadded,kpadded,trows,tcols,result);
+  final = result;
+  /**std::vector<int> qualityType;
+  qualityType.push_back(CV_IMWRITE_PNG_COMPRESSION);
+  qualityType.push_back(90);
+  std::cout << result.depth()<<std::endl;
+  cv::imwrite("cesult.png",result,qualityType);*/
 }
 
 void discrete_transform(cv::Mat &ipadded,
@@ -60,6 +66,17 @@ void discrete_transform(cv::Mat &ipadded,
 
   cv::dft(icomplex, ipadded, cv::DFT_INVERSE | cv::DFT_REAL_OUTPUT);
 
+  /*cv::split(kcomplex,planes);
+  cv::magnitude(planes[0], planes[1], planes[0]);
+  cv::Mat mag = planes[0];
+
+  mag += cv::Scalar::all(1);
+  log(mag,mag);
+
+  cv::normalize(mag,mag,0,255,CV_MINMAX);
+  cv::imshow("mag_kernel",mag);
+  cv::waitKey();*/
+
   int ccx = ipadded.cols/2;
   int ccy = ipadded.rows/2;
 
@@ -77,6 +94,6 @@ void discrete_transform(cv::Mat &ipadded,
   qq3.copyTo(qq1);
   ttmp.copyTo(qq3);
 
-  cv::normalize(ipadded, ipadded, 0, 1, CV_MINMAX);
-  ipadded(cv::Rect(0, 0,ipadded.cols - 2*tcols,ipadded.rows - 2*trows)).copyTo(result);
+  cv::normalize(ipadded, ipadded, 0, 255, CV_MINMAX);
+  ipadded(cv::Rect(0,0,ipadded.cols-2*tcols,ipadded.rows-2*trows)).copyTo(result);
 }

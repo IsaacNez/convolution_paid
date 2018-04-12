@@ -8,7 +8,7 @@ void plotConv(std::string& file_name){
   std::cout<< "The test is just starting"<<std::endl;
   int k_sizes = sizeof(kernel_sizes)/ sizeof(*kernel_sizes);
 
-  cv::Mat original = cv::imread(file_name,CV_32FC1);
+  cv::Mat original = cv::imread(file_name,CV_LOAD_IMAGE_GRAYSCALE);
 
   if(original.empty()){
     exit(EXIT_FAILURE);
@@ -22,14 +22,21 @@ void plotConv(std::string& file_name){
   std::vector<double> testFSSx(k_sizes);  //x points of 3Dplot with Spatial Filtering and Separable Kernel
   std::vector<double> testFNSSx(k_sizes); //x points of 3Dplot with Spatial Filtering and Non-Separable Kernel
   std::vector<double> testFNSFx(k_sizes); //x points of 3Dplot with Frequency Filtering and Non-Separable Kernel
+  std::vector<double> diverSx(k_sizes);
+  std::vector<double> diverFx(k_sizes);
 
   std::vector<double> testFSSy(k_sizes);  //y points of 3Dplot with Spatial Filtering and Separable Kernel
   std::vector<double> testFNSSy(k_sizes); //y points of 3Dplot with Spatial Filtering and Non-Separable Kernel
   std::vector<double> testFNSFy(k_sizes); //y points of 3Dplot with Frequency Filtering and Non-Separable Kernel
+  std::vector<double> diverSy(k_sizes);
+  std::vector<double> diverFy(k_sizes);
 
   std::vector<double> testFSSz(k_sizes);  //z points of 3Dplot with Spatial Filtering and Separable Kernel
   std::vector<double> testFNSSz(k_sizes); //z points of 3Dplot with Spatial Filtering and Non-Separable Kernel
   std::vector<double> testFNSFz(k_sizes); //z points of 3Dplot with Frequency Filtering and Non-Separable Kernel
+  std::vector<double> diverSz(k_sizes);
+  std::vector<double> diverFz(k_sizes);
+
   for(int i = 0; i < k_sizes; ++i) {
     std::cout<<"Iteration: "<<i+1<<std::endl;
 
@@ -39,16 +46,24 @@ void plotConv(std::string& file_name){
     cv::Mat gaussian_filter = cv::getGaussianKernel(kernel_size, sigma, CV_32FC1);  //creates the gaussian filter based on the size of the kernel
 
     for (int j = 0; j < k_sizes; ++j) {
+
+      double normF = 0.0f;
+      double normS = 0.0f;
+      cv::Mat test;
       int vertical_size = image_vertical_sizes[j];
       int horizon_size = image_horizontal_sizes[j];
 
       testFSSx.push_back(kernel_size);
       testFNSSx.push_back(kernel_size);
       testFNSFx.push_back(kernel_size);
+      diverSx.push_back(kernel_size);
+      diverFx.push_back(kernel_size);
 
       testFSSy.push_back(vertical_size);
       testFNSSy.push_back(vertical_size);
       testFNSFy.push_back(vertical_size);
+      diverSy.push_back(vertical_size);
+      diverFy.push_back(vertical_size);
 
       cv::Rect roi_rect = cv::Rect(0,0,horizon_size,vertical_size);
       cv::Mat orig = original(roi_rect);
@@ -59,21 +74,25 @@ void plotConv(std::string& file_name){
       for (int k = 0; k < runs; ++k) {
 
         std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
-        spatial_non_separable_convolution(gaussian_filter, orig);
+        spatial_non_separable_convolution(gaussian_filter, orig,test);
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
         time += std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+        normS += frobenius(test);
       }
       testFNSSz.push_back(time / runs);
+      diverSz.push_back(normS/runs);
       time = 0.0f;
 
       for (int k = 0; k < runs; ++k) {
 
         std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
-        frequency_nonseparable_convolution(gaussian_filter, orig);
+        frequency_nonseparable_convolution(gaussian_filter, orig,test);
         std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
         time += std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
+        normF += frobenius(test);
       }
       testFNSFz.push_back(time / runs);
+      diverFz.push_back(normF/runs);
       time = 0.0f;
 
       for (int k = 0; k < runs; ++k) {
@@ -86,6 +105,7 @@ void plotConv(std::string& file_name){
       testFSSz.push_back(time / runs);
     }
   }
+  Py_Initialize();
   std::string sfsk = ",'*',color='green',label='Spatial Filtering using Separable Kernel'";
   std::string sfskfn = "SFSK.svg";
   plotpython(testFSSx,
@@ -119,8 +139,23 @@ void plotConv(std::string& file_name){
              testFNSFy,
              testFNSFz,
              sfsk,
-              sfskfn);
+             sfskfn);
 
+  sfsk = ",'x',color='green',label='Frecuency Image Norm'";
+  sfskfn = ",'+',color='black',label='Spatial Image Norm'";
+  std::string zlabel = "Matrix norm";
+  std::string file = "image_norm.svg";
+  plotpython2(diverFx,
+              diverFy,
+              diverFz,
+              diverSx,
+              diverSy,
+              diverSz,
+              sfsk,
+              sfskfn,
+              zlabel,
+              file);
+  Py_Exit(0);
 }
 
 void plotpython(const std::vector<double>& FSSx,
@@ -150,7 +185,7 @@ void plotpython(const std::vector<double>& FSSx,
 
   std::string commandSK = "ax.plot("+sFSSx+","+sFSSy+","+sFSSz+label+")";
   std::string commandfn = "plt.savefig('"+file_name+"')";
-  Py_Initialize();
+
   PyRun_SimpleString("import numpy as np");
   PyRun_SimpleString("import matplotlib.pyplot as plt");
   PyRun_SimpleString("from mpl_toolkits.mplot3d import Axes3D");
@@ -173,7 +208,9 @@ void plotpython2(const std::vector<double>& FNSSx,
                  const std::vector<double>& FNSFy,
                  const std::vector<double>& FNSFz,
                  std::string label,
-                  std::string label2) {
+                 std::string label2,
+                 std::string zlabel,
+                 std::string file_name) {
 
   int size = FNSSx.size();
 
@@ -210,8 +247,9 @@ void plotpython2(const std::vector<double>& FNSSx,
 
   std::string commandNSK = "ax.plot("+sFNSSx+","+sFNSSy+","+sFNSSz+label+")";
   std::string commandFNSK = "ax.plot("+sFNSFx+","+sFNSFy+","+sFNSFz+label2+")";
+  std::string ztitle = "ax.set_zlabel('"+zlabel+"')";
+  std::string file = "plt.savefig('"+file_name+"')";
 
-  Py_Initialize();
   PyRun_SimpleString("import numpy as np");
   PyRun_SimpleString("import matplotlib.pyplot as plt");
   PyRun_SimpleString("from mpl_toolkits.mplot3d import Axes3D");
@@ -220,9 +258,19 @@ void plotpython2(const std::vector<double>& FNSSx,
   PyRun_SimpleString(commandFNSK.c_str());
   PyRun_SimpleString("ax.set_xlabel('Kernel size')");
   PyRun_SimpleString("ax.set_ylabel('Image Size (height)')");
-  PyRun_SimpleString("ax.set_zlabel('Time (in microseconds)')");
+  PyRun_SimpleString(ztitle.c_str());
   PyRun_SimpleString("plt.legend(loc='upper left', numpoints=1, ncol=1, fontsize=8, bbox_to_anchor=(0, 0))");
-  PyRun_SimpleString("plt.savefig('F&SFNSK.svg')");
-  Py_Exit(0);
+  PyRun_SimpleString(file.c_str());
 
+}
+
+
+double frobenius(const cv::Mat& image){
+  double norm = 0.0f;
+  for (int i = 0; i < image.rows; ++i) {
+    for (int j = 0; j < image.cols; ++j) {
+      norm += image.at<uchar>(i,j)*image.at<uchar>(i,j);
+    }
+  }
+  return norm;
 }
