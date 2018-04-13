@@ -29,12 +29,11 @@ void spatial_non_separable_convolution(const cv::Mat &gaussian_kernel,
 
   cv::Mat kernel = cv::Mat::zeros(gaussian_kernel.cols,gaussian_kernel.cols,gaussian_kernel.type());
   generate_gaussian_kernel(gaussian_kernel,kernel);
-
+  cv::flip(kernel,kernel,-1);
   cv::Point anchor = cv::Point(-1,-1);
-  cv::filter2D(orig,dst,-1,kernel,anchor,0,cv::BORDER_DEFAULT);
+  cv::filter2D(orig,dst,-1/CV_32F,kernel,anchor,0,cv::BORDER_CONSTANT);
 
   final = dst;
-  //cv::imwrite("result.png",dst);
 }
 
 void generate_gaussian_kernel(const cv::Mat &gaussian_kernel, cv::Mat &spatial_kernel) {
